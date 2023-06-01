@@ -1,16 +1,14 @@
 {
 	"name": "Pinsir",
 	"version": "1.0",
-	"description": "Pin tabs the right way.",
+	"description": "Open pinned tabs when new window is created.",
 	"manifest_version": 3,
 	"permissions": ["storage", "tabs"],
-	"content_scripts": [
-		{
-			"matches": ["*://*/*"],
-			"js": ["contentscript.js"]
-		}
-	],
 	"background": {
 		"service_worker": "background.js"
-	}
+	},
+  "action": {
+    "default_title": "Pinsir",
+    "default_popup": "popup.html"
+  }
 }
