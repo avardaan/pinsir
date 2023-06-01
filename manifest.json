@@ -6,9 +6,5 @@
 	"permissions": ["storage", "tabs"],
 	"background": {
 		"service_worker": "background.js"
-	},
-  "action": {
-    "default_title": "Pinsir",
-    "default_popup": "popup.html"
-  }
+	}
 }
