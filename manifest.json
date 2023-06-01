@@ -1,0 +1,16 @@
+{
+	"name": "Pinsir",
+	"version": "1.0",
+	"description": "Pin tabs the right way.",
+	"manifest_version": 3,
+	"permissions": ["storage", "tabs"],
+	"content_scripts": [
+		{
+			"matches": ["*://*/*"],
+			"js": ["contentscript.js"]
+		}
+	],
+	"background": {
+		"service_worker": "background.js"
+	}
+}
