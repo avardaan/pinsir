@@ -1,4 +1,11 @@
-function savePinnedTabs() {
+import { openPinnedTabs } from './utils.js';
+
+// add event listener to upsert button
+const upsertPinnedTabsBtn = document.getElementById('upsert-pinned-tabs-btn');
+upsertPinnedTabsBtn.addEventListener('click', upsertPinnedTabs);
+
+// save or update (upsert) pinned tabs
+function upsertPinnedTabs() {
 	// get pinned tabs
 	chrome.tabs.query({ pinned: true }).then((tabs) => {
 		const pinnedTabs = tabs.map((tab) => ({
@@ -6,13 +13,15 @@ function savePinnedTabs() {
 			url: tab.url,
 		}));
 		// store pinned tabs in chrome.storage
-		chrome.storage.sync.set({ pinnedTabs: pinnedTabs }).then(() => {
-			// get the saved pinned tabs
-			chrome.storage.sync.get(['pinnedTabs']).then(() => {});
-		});
+		chrome.storage.sync.set({ pinnedTabs: pinnedTabs });
 	});
 }
 
-// add event listener to button
-const savePinnedTabsBtn = document.getElementById('save-pinned-tabs');
-savePinnedTabsBtn.addEventListener('click', savePinnedTabs);
+// add event listener to open tabs button
+const openPinnedTabsBtn = document.getElementById('open-pinned-tabs-btn');
+openPinnedTabsBtn.addEventListener('click', openPinnedTabsFn);
+
+// open pinned tabs
+function openPinnedTabsFn() {
+	openPinnedTabs();
+}

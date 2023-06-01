@@ -5,7 +5,8 @@
 	"description": "Never lose your pinned tabs again!",
 	"permissions": ["storage", "tabs"],
 	"background": {
-		"service_worker": "background.js"
+		"service_worker": "background.js",
+		"type": "module"
 	},
 	"action": {
 		"default_title": "Pinsir",
