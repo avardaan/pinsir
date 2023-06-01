@@ -1,12 +1,11 @@
 function savePinnedTabs() {
 	// get pinned tabs
 	chrome.tabs.query({ pinned: true }).then((tabs) => {
+		const pinnedTabsURLs = tabs.map((tab) => tab.url);
 		// store pinned tabs in chrome.storage
-		chrome.storage.sync.set({ pinnedTabs: tabs }).then(() => {
+		chrome.storage.sync.set({ pinnedTabs: pinnedTabsURLs }).then(() => {
 			// get the saved pinned tabs
-			chrome.storage.sync.get(['pinnedTabs']).then((result) => {
-				console.log('result', result);
-			});
+			chrome.storage.sync.get(['pinnedTabs']).then(() => {});
 		});
 	});
 }
