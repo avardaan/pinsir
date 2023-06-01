@@ -1,8 +1,8 @@
 {
 	"manifest_version": 3,
-	"name": "Pinsir",
+	"name": "Pinsir - Save Pinned Tabs",
 	"version": "1.0",
-	"description": "Pinned tabs. The way it should be.",
+	"description": "Never lose your pinned tabs again!",
 	"permissions": ["storage", "tabs"],
 	"background": {
 		"service_worker": "background.js"
