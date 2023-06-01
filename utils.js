@@ -1,5 +1,7 @@
+export const PINNED_TABS_KEY = 'pinnedTabs';
+
 export function openPinnedTabs(windowId) {
-	chrome.storage.sync.get(['pinnedTabs']).then((result) => {
+	chrome.storage.sync.get([PINNED_TABS_KEY]).then((result) => {
 		const { pinnedTabs } = result;
 		// loop over pinned tabs and create them in the new window
 		pinnedTabs.forEach((pinnedTab, idx) => {

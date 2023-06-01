@@ -1,30 +1,33 @@
 .container {
 	display: flex;
 	justify-content: center;
-	margin-top: 20px;
 	flex-direction: row;
+	font-size: 50%;
+	min-width: 100%;
 }
 
 button {
-	background-color: #4caf50; /* Green */
+	display: flex;
+	flex-grow: 1;
 	border: none;
-	color: white;
-	padding: 10px 20px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 12px;
-	margin: 10px;
 	cursor: pointer;
-	border-radius: 5px;
+	white-space: nowrap;
+	text-align: center;
+	color: white;
+	padding: 8px 8px;
+	margin: 8px;
+	border-radius: 8px;
 }
 
-button:hover {
-	background-color: #3e8e41;
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
-button:active {
-	background-color: #3e8e41;
-	box-shadow: 0 5px #666;
-	transform: translateY(4px);
+#upsert-pinned-tabs-btn {
+	background-color: #4681f4;
+}
+
+#open-pinned-tabs-btn {
+	background-color: #33b249;
 }
