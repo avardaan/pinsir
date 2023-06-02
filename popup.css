@@ -1,0 +1,33 @@
+.container {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	font-size: 50%;
+	min-width: 100%;
+}
+
+button {
+	display: flex;
+	flex-grow: 1;
+	border: none;
+	cursor: pointer;
+	white-space: nowrap;
+	text-align: center;
+	color: white;
+	padding: 8px 8px;
+	margin: 8px;
+	border-radius: 8px;
+}
+
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+#upsert-pinned-tabs-btn {
+	background-color: #4681f4;
+}
+
+#open-pinned-tabs-btn {
+	background-color: #33b249;
+}
