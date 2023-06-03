@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Pinsir - Save Pinned Tabs",
-	"version": "1.0",
+	"version": "1.01",
 	"description": "Never lose your pinned tabs again!",
 	"icons": {
 		"16": "assets/icons/logo16.png",
