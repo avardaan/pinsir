@@ -1,7 +1,6 @@
 import { openPinnedTabs } from './utils.js';
 
-// event listener for when a new window is created
-chrome.windows.onCreated.addListener((window) => {
+function onNewWindowCreated(window) {
 	const newWindowId = window.id;
 	// check existing pinned tabs
 	chrome.tabs.query({ pinned: true }).then((openedPinnedTabs) => {
@@ -12,4 +11,9 @@ chrome.windows.onCreated.addListener((window) => {
 			openPinnedTabs(newWindowId);
 		});
 	});
+}
+
+// event listener for when a new window is created
+chrome.windows.onCreated.addListener(onNewWindowCreated, {
+	windowTypes: ['normal'],
 });
