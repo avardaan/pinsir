@@ -1,8 +1,10 @@
 # Build output
 dist/
-*.zip
-*.crx
+
+# Chrome Extension specific
 *.pem
+*.crx
+*.zip
 
 # Dependencies
 node_modules/
@@ -27,11 +29,6 @@ yarn-error.log*
 .env
 .env.local
 .env.*.local
-
-# Chrome Extension specific
-*.pem
-*.crx
-*.zip
 
 # Temporary files
 *.tmp
