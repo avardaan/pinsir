@@ -1,0 +1,4 @@
+export const CONFIG = {
+  PINNED_TABS_STORAGE_KEY: 'pinnedTabs',
+  SAVE_BTN_DISABLED_TIMEOUT_MS: 1500,
+};
