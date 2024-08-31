@@ -1,4 +1,4 @@
-import { openPinnedTabs, getPinnedTabs } from './utils.js';
+import { getAndOpenPinnedTabs } from './utils.js';
 import { CONFIG } from './config.js';
 
 const SAVE_BTN_TEXT = {

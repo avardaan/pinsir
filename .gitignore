@@ -1,3 +1,38 @@
+# Build output
+dist/
 *.zip
 *.crx
 *.pem
+
+# Dependencies
+node_modules/
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Chrome Extension specific
+*.pem
+*.crx
+*.zip
+
+# Temporary files
+*.tmp
+*.temp

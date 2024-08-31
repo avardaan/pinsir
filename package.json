@@ -1,0 +1,24 @@
+{
+  "name": "pinsir",
+  "version": "1.2.0",
+  "description": "",
+  "main": "popup.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avardaan/pinsir.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avardaan/pinsir/issues"
+  },
+  "homepage": "https://github.com/avardaan/pinsir#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.0.270",
+    "typescript": "^5.5.4"
+  }
+}
