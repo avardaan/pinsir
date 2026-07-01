@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'bun:test';
 import { resetMocks, getStorage, getCreatedTabs, addMockTab } from './test/setup.js';
-import { openPinnedTabsInWindow, savePinnedTabsToStorage, getAndOpenPinnedTabs } from './utils.js';
+import { openPinnedTabsInWindow, savePinnedTabsToStorage } from './utils.js';
 
 describe('utils', () => {
   beforeEach(() => {
@@ -77,25 +77,4 @@ describe('utils', () => {
     });
   });
 
-  describe('getAndOpenPinnedTabs', () => {
-    it('should read stored tabs and create them in target window', async () => {
-      const storage = getStorage();
-      storage['pinnedTabs'] = [
-        { url: 'https://mail.google.com', title: 'Gmail' },
-        { url: 'https://calendar.google.com', title: 'Calendar' },
-      ];
-
-      await getAndOpenPinnedTabs(7, 'pinnedTabs');
-
-      const created = getCreatedTabs();
-      expect(created).toHaveLength(2);
-      expect(created[0].windowId).toBe(7);
-      expect(created[1].windowId).toBe(7);
-    });
-
-    it('should handle missing storage key gracefully', async () => {
-      await getAndOpenPinnedTabs(7, 'nonexistent');
-      expect(getCreatedTabs()).toHaveLength(0);
-    });
-  });
 });

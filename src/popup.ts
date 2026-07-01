@@ -26,6 +26,14 @@ async function loadSavedTabs() {
 	renderSavedTabs(tabs);
 }
 
+function getHostname(url: string): string {
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return url;
+  }
+}
+
 function renderSavedTabs(tabs: any[]) {
 	savedCount.innerText = String(tabs.length);
 	savedTabsList.innerHTML = '';
@@ -51,16 +59,15 @@ function renderSavedTabs(tabs: any[]) {
 
 		const favicon = document.createElement('img');
 		favicon.className = 'saved-tab-favicon';
-		favicon.src = tab.favIconUrl || `https://www.google.com/s2/favicons?domain=${new URL(tab.url).hostname}&sz=32`;
+		favicon.src = tab.favIconUrl || `https://www.google.com/s2/favicons?domain=${getHostname(tab.url)}&sz=32`;
 		favicon.alt = '';
 
 		const textWrap = document.createElement('div');
-		textWrap.style.overflow = 'hidden';
-		textWrap.style.minWidth = '0';
+		textWrap.className = 'saved-tab-text';
 
 		const title = document.createElement('div');
 		title.className = 'saved-tab-title';
-		title.innerText = tab.title || new URL(tab.url).hostname;
+		title.innerText = tab.title || getHostname(tab.url);
 
 		const urlLine = document.createElement('div');
 		urlLine.className = 'saved-tab-url';

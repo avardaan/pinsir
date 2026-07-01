@@ -177,6 +177,12 @@ body {
 	border-radius: 2px;
 }
 
+.saved-tab-text {
+	overflow: hidden;
+	min-width: 0;
+	flex: 1;
+}
+
 .saved-tab-title {
 	white-space: nowrap;
 	overflow: hidden;

@@ -35,12 +35,8 @@ export async function openPinnedTabsInWindow(targetWindowId: number, pinnedTabs:
   }
 }
 
-export async function getAndOpenPinnedTabs(targetWindowId: number, pinnedTabsStorageKey: string): Promise<void> {
-  const pinnedTabsFromStorage = await getPinnedTabs(pinnedTabsStorageKey);
-  await openPinnedTabsInWindow(targetWindowId, pinnedTabsFromStorage);
-}
 
-function saveTabsToStorage(storageKey: string, tabs: any[]): void {
+async function saveTabsToStorage(storageKey: string, tabs: any[]): Promise<void> {
   console.log(`[saveTabsToStorage] storageKey=${storageKey}, tabs.length=${tabs.length}`);
   if (!storageKey) {
     console.log("[saveTabsToStorage] No storage key provided");
@@ -52,8 +48,13 @@ function saveTabsToStorage(storageKey: string, tabs: any[]): void {
     return;
   }
 
-  chrome.storage.sync.set({ [storageKey]: tabs });
-  console.log(`[saveTabsToStorage] Saved ${tabs.length} tabs to storage`);
+  try {
+    await chrome.storage.sync.set({ [storageKey]: tabs });
+    console.log(`[saveTabsToStorage] Saved ${tabs.length} tabs to storage`);
+  } catch (err) {
+    console.error('[saveTabsToStorage] Failed to save tabs:', err);
+    throw err;
+  }
 }
 
 export async function savePinnedTabsToStorage(pinnedTabsStorageKey: string, pinnedTabs?: any[]): Promise<void> {

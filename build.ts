@@ -10,6 +10,18 @@ if (existsSync(distDir)) {
 }
 mkdirSync(distDir, { recursive: true });
 
+// Run tsc first so failures don't leave stale dist
+const tscResult = Bun.spawnSync({
+  cmd: ['tsc'],
+  cwd: rootDir,
+  stdout: 'inherit',
+  stderr: 'inherit',
+});
+
+if (tscResult.exitCode !== 0) {
+  process.exit(tscResult.exitCode ?? 1);
+}
+
 // Copy static files
 const filesToCopy = [
   'manifest.json',
@@ -27,17 +39,5 @@ for (const file of filesToCopy) {
 const assetsSrc = path.join(rootDir, 'assets');
 const assetsDest = path.join(distDir, 'assets');
 cpSync(assetsSrc, assetsDest, { recursive: true });
-
-// Run tsc
-const tscResult = Bun.spawnSync({
-  cmd: ['tsc'],
-  cwd: rootDir,
-  stdout: 'inherit',
-  stderr: 'inherit',
-});
-
-if (tscResult.exitCode !== 0) {
-  process.exit(tscResult.exitCode ?? 1);
-}
 
 console.log('Build complete.');
