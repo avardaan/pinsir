@@ -5,10 +5,9 @@
   "main": "popup.js",
   "scripts": {
     "build": "tsc",
-    "test": "vitest",
-    "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test": "bun test src",
+    "test:run": "bun test src --run",
+    "test:coverage": "bun test src --coverage"
   },
   "repository": {
     "type": "git",
@@ -22,9 +21,8 @@
   },
   "homepage": "https://github.com/avardaan/pinsir#readme",
   "devDependencies": {
+    "@types/bun": "latest",
     "@types/chrome": "^0.0.270",
-    "@vitest/coverage-v8": "^4.1.9",
-    "typescript": "^5.5.4",
-    "vitest": "^4.1.9"
+    "typescript": "^5.5.4"
   }
 }

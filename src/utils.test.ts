@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'bun:test';
 import { resetMocks, getStorage, getCreatedTabs, addMockTab } from './test/setup.js';
 import { openPinnedTabsInWindow, savePinnedTabsToStorage, getAndOpenPinnedTabs } from './utils.js';
 
