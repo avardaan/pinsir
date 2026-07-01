@@ -1,7 +1,33 @@
-<link rel="stylesheet" href="popup.css" />
-<script type="module" src="popup.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+	<script type="module" src="popup.js"></script>
 
-<div class="container">
-	<button id="save-pinned-tabs-btn">Save Pinned Tabs</button>
-	<button id="open-pinned-tabs-btn">Open Saved Tabs</button>
-</div>
+	<div class="popup">
+		<div class="header">
+			<img src="assets/icons/logo32.png" alt="Pinsir" class="logo">
+			<span class="title">Pinsir</span>
+		</div>
+		<div class="buttons">
+			<button id="save-pinned-tabs-btn" class="btn btn-primary">
+				<span class="label">Save Pinned Tabs</span>
+			</button>
+			<button id="open-pinned-tabs-btn" class="btn btn-secondary">
+				<span class="label">Open Saved Tabs</span>
+			</button>
+		</div>
+		<div class="saved-tabs-section">
+			<div class="section-header">
+				<span class="section-title">Saved Tabs</span>
+				<span id="saved-count" class="saved-count">0</span>
+			</div>
+			<div id="saved-tabs-list" class="saved-tabs-list"></div>
+		</div>
+		<div id="status" class="status"></div>
+	</div>
+</body>
+</html>

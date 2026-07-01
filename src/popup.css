@@ -1,33 +1,203 @@
-.container {
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	width: 280px;
+	background: #f5f5f7;
+}
+
+.popup {
+	padding: 16px;
+}
+
+.header {
 	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 16px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.logo {
+	width: 28px;
+	height: 28px;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #1a1a1a;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.btn {
+	display: flex;
+	align-items: center;
 	justify-content: center;
-	flex-direction: row;
-	font-size: 50%;
-	min-width: 100%;
-}
-
-button {
-	display: flex;
-	flex-grow: 1;
+	gap: 8px;
+	width: 100%;
+	padding: 10px 14px;
 	border: none;
+	border-radius: 10px;
+	font-size: 13px;
+	font-weight: 500;
 	cursor: pointer;
-	white-space: nowrap;
-	text-align: center;
 	color: white;
-	padding: 8px 8px;
-	margin: 8px;
-	border-radius: 8px;
+	transition: transform 0.1s, opacity 0.15s;
 }
 
-button:disabled {
-	opacity: 0.5;
+.btn:hover:not(:disabled) {
+	transform: translateY(-1px);
+	opacity: 0.92;
+}
+
+.btn:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+.btn:disabled {
+	opacity: 0.6;
 	cursor: not-allowed;
 }
 
-#upsert-pinned-tabs-btn {
-	background-color: #4681f4;
+.btn-primary {
+	background-color: #2563eb;
 }
 
-#open-pinned-tabs-btn {
-	background-color: #33b249;
+.btn-secondary {
+	background-color: #059669;
+}
+
+.icon {
+	font-size: 14px;
+}
+
+.label {
+	white-space: nowrap;
+}
+
+.status {
+	margin-top: 12px;
+	text-align: center;
+	font-size: 12px;
+	color: #666;
+	min-height: 18px;
+}
+
+.saved-tabs-section {
+	margin-top: 14px;
+	padding-top: 12px;
+	border-top: 1px solid #e0e0e0;
+}
+
+.section-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.section-title {
+	font-size: 12px;
+	font-weight: 600;
+	color: #555;
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+}
+
+.saved-count {
+	font-size: 11px;
+	font-weight: 500;
+	color: #888;
+	background: #eee;
+	padding: 2px 6px;
+	border-radius: 10px;
+}
+
+.saved-tabs-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	max-height: 140px;
+	overflow-y: auto;
+}
+
+.saved-tab-item {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 10px;
+	background: #ffffff;
+	border: 1px solid #e2e2e5;
+	border-radius: 8px;
+	font-size: 12px;
+	color: #333;
+	max-width: 100%;
+	overflow: hidden;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.saved-tab-delete {
+	flex-shrink: 0;
+	width: 18px;
+	height: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background: #f5f5f5;
+	color: #999;
+	font-size: 13px;
+	font-weight: 600;
+	border-radius: 4px;
+	cursor: pointer;
+	line-height: 1;
+	padding: 0;
+	margin-right: 2px;
+}
+
+.saved-tab-delete:hover {
+	background: #fee2e2;
+	color: #dc2626;
+}
+
+.saved-tab-favicon {
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	border-radius: 2px;
+}
+
+.saved-tab-title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 11px;
+	color: #444;
+}
+
+.saved-tab-url {
+	font-size: 10px;
+	color: #888;
+	margin-top: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.saved-tab-empty {
+	font-size: 12px;
+	color: #999;
+	font-style: italic;
+	padding: 4px 0;
 }
