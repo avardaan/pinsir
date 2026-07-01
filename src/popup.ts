@@ -1,4 +1,4 @@
-import { savePinnedTabsToStorage, getAndOpenPinnedTabs } from './utils.js';
+import { savePinnedTabsToStorage } from './utils.js';
 import { CONFIG } from './config.js';
 
 const SAVE_BTN_TEXT = {
@@ -118,9 +118,7 @@ async function savePinnedTabsFn() {
 // open pinned tabs
 async function openPinnedTabsFn() {
 	console.log("[popup] Open button clicked");
-	const window = await chrome.windows.create({ focused: true });
-	if (window.id) {
-		await getAndOpenPinnedTabs(window.id, CONFIG.PINNED_TABS_STORAGE_KEY);
-		setStatus('Saved tabs restored!');
-	}
+	await chrome.windows.create({ focused: true });
+	// Background listener auto-restores saved tabs in the new window
+	setStatus('Saved tabs restored!');
 }

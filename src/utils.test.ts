@@ -50,14 +50,14 @@ describe('utils', () => {
   });
 
   describe('openPinnedTabsInWindow', () => {
-    it('should create all pinned tabs in the target window', () => {
+    it('should create all pinned tabs in the target window', async () => {
       const tabs = [
         { url: 'https://a.com', title: 'A' },
         { url: 'https://b.com', title: 'B' },
         { url: 'https://c.com', title: 'C' },
       ];
 
-      openPinnedTabsInWindow(42, tabs);
+      await openPinnedTabsInWindow(42, tabs);
 
       const created = getCreatedTabs();
       expect(created).toHaveLength(3);
@@ -66,13 +66,13 @@ describe('utils', () => {
       expect(created[2]).toMatchObject({ index: 2, windowId: 42, url: 'https://c.com', pinned: true, active: false });
     });
 
-    it('should return early when windowId is falsy', () => {
-      openPinnedTabsInWindow(0, [{ url: 'https://test.com' }]);
+    it('should return early when windowId is falsy', async () => {
+      await openPinnedTabsInWindow(0, [{ url: 'https://test.com' }]);
       expect(getCreatedTabs()).toHaveLength(0);
     });
 
-    it('should return early when tabs array is empty', () => {
-      openPinnedTabsInWindow(42, []);
+    it('should return early when tabs array is empty', async () => {
+      await openPinnedTabsInWindow(42, []);
       expect(getCreatedTabs()).toHaveLength(0);
     });
   });

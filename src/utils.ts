@@ -11,7 +11,7 @@ async function getPinnedTabs(storageKey: string): Promise<any[]> {
   return tabs;
 }
 
-export function openPinnedTabsInWindow(targetWindowId: number, pinnedTabs: any[]) {
+export async function openPinnedTabsInWindow(targetWindowId: number, pinnedTabs: any[]) {
   console.log(`[openPinnedTabsInWindow] targetWindowId=${targetWindowId}, pinnedTabs.length=${pinnedTabs.length}`);
   if (!targetWindowId) {
     console.log("[openPinnedTabsInWindow] No window ID provided");
@@ -23,21 +23,21 @@ export function openPinnedTabsInWindow(targetWindowId: number, pinnedTabs: any[]
     return;
   }
 
-  pinnedTabs.forEach((pinnedTab, idx) => {
-    const pinnedTabURL = pinnedTab.url;
-    chrome.tabs.create({
+  for (let idx = 0; idx < pinnedTabs.length; idx++) {
+    const pinnedTab = pinnedTabs[idx];
+    await chrome.tabs.create({
       index: idx,
       windowId: targetWindowId,
-      url: pinnedTabURL,
+      url: pinnedTab.url,
       pinned: true,
       active: false,
     });
-  });
+  }
 }
 
 export async function getAndOpenPinnedTabs(targetWindowId: number, pinnedTabsStorageKey: string): Promise<void> {
   const pinnedTabsFromStorage = await getPinnedTabs(pinnedTabsStorageKey);
-  openPinnedTabsInWindow(targetWindowId, pinnedTabsFromStorage);
+  await openPinnedTabsInWindow(targetWindowId, pinnedTabsFromStorage);
 }
 
 function saveTabsToStorage(storageKey: string, tabs: any[]): void {
