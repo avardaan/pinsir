@@ -1,23 +1,61 @@
-import { getAndOpenPinnedTabs } from './utils.js';
+import { getPinnedTabs } from './utils.js';
 import { CONFIG } from './config.js';
 
 function onNewWindowCreated(window: chrome.windows.Window) {
 	const newWindowId = window.id;
+	if (!newWindowId) return;
 	console.log(`[background] New window created: id=${newWindowId}`);
 
-	chrome.tabs.query({ windowId: newWindowId! }).then(async (allTabs) => {
-		console.log(`[background] Found ${allTabs.length} tabs in new window`);
+	chrome.tabs.query({ windowId: newWindowId }).then(async (allTabs) => {
+		const savedTabs = await getPinnedTabs(CONFIG.PINNED_TABS_STORAGE_KEY);
+		if (!savedTabs.length) {
+			console.log('[background] No saved tabs to restore');
+			return;
+		}
 
-		// Save IDs of original tabs (e.g. default newtab) so we can remove them
-		const originalTabIds = allTabs.map((tab) => tab.id).filter((id): id is number => id !== undefined);
+		console.log(`[background] Restoring ${savedTabs.length} saved tabs`);
 
-		// Create saved tabs first (keeps window alive)
-		await getAndOpenPinnedTabs(newWindowId!, CONFIG.PINNED_TABS_STORAGE_KEY);
+		// Repurpose the first existing tab (e.g. default newtab) for the first saved tab.
+		// This avoids the "create new tab then remove original" visual flicker.
+		const firstTab = allTabs[0];
+		if (firstTab?.id) {
+			await chrome.tabs.update(firstTab.id, {
+				url: savedTabs[0].url,
+				pinned: true,
+				active: false,
+			});
+			console.log(`[background] Updated first tab to ${savedTabs[0].url}`);
+		} else {
+			// No existing tab to repurpose, create the first one from scratch
+			await chrome.tabs.create({
+				windowId: newWindowId,
+				url: savedTabs[0].url,
+				pinned: true,
+				active: false,
+			});
+			console.log(`[background] Created first tab: ${savedTabs[0].url}`);
+		}
 
-		// Remove the original tabs (default newtab, etc.)
-		if (originalTabIds.length) {
-			await chrome.tabs.remove(originalTabIds);
-			console.log(`[background] Removed ${originalTabIds.length} original tabs`);
+		// Create remaining saved tabs as new tabs
+		for (let i = 1; i < savedTabs.length; i++) {
+			await chrome.tabs.create({
+				windowId: newWindowId,
+				url: savedTabs[i].url,
+				pinned: true,
+				active: false,
+			});
+			console.log(`[background] Created tab ${i}: ${savedTabs[i].url}`);
+		}
+
+		// Remove any remaining original tabs (all except the first one we repurposed)
+		const remainingOriginalIds = allTabs
+			.slice(1)
+			.map((tab) => tab.id)
+			.filter((id): id is number => id !== undefined);
+
+		if (remainingOriginalIds.length) {
+			await chrome.tabs.remove(remainingOriginalIds);
+			console.log(`[background] Removed ${remainingOriginalIds.length} original tabs`);
 		}
 	});
 }

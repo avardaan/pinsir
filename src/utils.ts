@@ -1,4 +1,4 @@
-async function getPinnedTabs(storageKey: string): Promise<any[]> {
+export async function getPinnedTabs(storageKey: string): Promise<any[]> {
   console.log(`[getPinnedTabs] Reading from storage key: ${storageKey}`);
   if (!storageKey) {
     console.log("[getPinnedTabs] No storage key provided, returning []");
