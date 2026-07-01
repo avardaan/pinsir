@@ -6,7 +6,8 @@
     "esModuleInterop": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "moduleResolution": "node"
+    "moduleResolution": "bundler",
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
