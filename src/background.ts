@@ -29,14 +29,12 @@ function onNewWindowCreated(window: chrome.windows.Window) {
 
 		console.log(`[background] Restoring ${savedTabs.length} saved tabs into empty window`);
 
-		const lastIndex = savedTabs.length - 1;
-
 		const firstTab = allTabs[0];
 		if (firstTab?.id) {
 			await chrome.tabs.update(firstTab.id, {
 				url: savedTabs[0].url,
 				pinned: true,
-				active: lastIndex === 0,
+				active: false,
 			});
 			console.log(`[background] Updated first tab to ${savedTabs[0].url}`);
 		} else {
@@ -44,7 +42,7 @@ function onNewWindowCreated(window: chrome.windows.Window) {
 				windowId: newWindowId,
 				url: savedTabs[0].url,
 				pinned: true,
-				active: lastIndex === 0,
+				active: false,
 			});
 			console.log(`[background] Created first tab: ${savedTabs[0].url}`);
 		}
@@ -54,10 +52,19 @@ function onNewWindowCreated(window: chrome.windows.Window) {
 				windowId: newWindowId,
 				url: savedTabs[i].url,
 				pinned: true,
-				active: i === lastIndex,
+				active: false,
 			});
 			console.log(`[background] Created tab ${i}: ${savedTabs[i].url}`);
 		}
+
+		// Create a fresh, focused non-pinned new tab so Chrome behaves normally
+		await chrome.tabs.create({
+			windowId: newWindowId,
+			url: 'chrome://newtab',
+			pinned: false,
+			active: true,
+		});
+		console.log('[background] Created focused new tab');
 	});
 }
 
