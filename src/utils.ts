@@ -75,5 +75,5 @@ export async function savePinnedTabsToStorage(pinnedTabsStorageKey: string, pinn
     finalPinnedTabs = pinnedTabs;
   }
 
-  saveTabsToStorage(pinnedTabsStorageKey, finalPinnedTabs);
+  await saveTabsToStorage(pinnedTabsStorageKey, finalPinnedTabs);
 }
